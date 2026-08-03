@@ -1,7 +1,9 @@
 package management.prayerhouse.system.service;
 
+import management.prayerhouse.system.entity.Campaign;
 import management.prayerhouse.system.entity.Member;
 import management.prayerhouse.system.entity.Payment;
+import management.prayerhouse.system.repository.CampaignRepository;
 import management.prayerhouse.system.repository.MemberRepository;
 import management.prayerhouse.system.repository.PaymentRepository;
 import management.prayerhouse.system.service.PaymentService;
@@ -17,11 +19,19 @@ public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
     private final MemberRepository memberRepository;
 
+    // Campaign
+    private final CampaignRepository campaignRepository;
+
     public PaymentServiceImpl(PaymentRepository paymentRepository,
-                              MemberRepository memberRepository) {
+                              MemberRepository memberRepository,
+                              CampaignRepository campaignRepository){
+
         this.paymentRepository = paymentRepository;
         this.memberRepository = memberRepository;
+        this.campaignRepository = campaignRepository;
     }
+
+
 
     @Override
     public Payment savePayment(Payment payment) {
@@ -73,5 +83,20 @@ public class PaymentServiceImpl implements PaymentService {
         }
 
         return paymentRepository.findByMember(member);
+
+
+
+    }
+
+    @Override
+    public List<Payment> getPaymentsByCampaign(Long campaignId) {
+
+        Campaign campaign = campaignRepository.findById(campaignId).orElse(null);
+        if(campaign == null){
+            return List.of();
+        }
+
+        return paymentRepository.findByCampaign(campaign);
+
     }
 }

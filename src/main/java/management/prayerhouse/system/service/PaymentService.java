@@ -20,4 +20,7 @@ public interface PaymentService {
 
     List<Payment> getPaymentsByMember(Long memberId);
 
+    //Campaign
+    List<Payment> getPaymentsByCampaign(Long campaignId);
+
 }

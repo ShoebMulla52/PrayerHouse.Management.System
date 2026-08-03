@@ -50,4 +50,13 @@ public class PaymentController {
 
         return "Payment deleted successfully";
     }
+
+   // Campaign controller
+    @GetMapping("/campaign/{campaignId}")
+    public List<Payment> getPaymentsByCampaign(
+            @PathVariable Long campaignId){
+
+        return paymentService.getPaymentsByCampaign(campaignId);
+
+    }
 }

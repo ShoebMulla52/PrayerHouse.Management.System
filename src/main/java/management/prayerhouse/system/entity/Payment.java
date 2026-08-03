@@ -21,6 +21,7 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Member Module
     @ManyToOne
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
@@ -46,6 +47,11 @@ public class Payment {
     private Integer month;
 
     private Integer year;
+
+    // Campaign module
+    @ManyToOne
+    @JoinColumn(name = "campaign_id", nullable = false)
+    private Campaign campaign;
 
     // Getters & Setters
 }
